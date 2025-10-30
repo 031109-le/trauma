@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cursos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Lista de Cursos</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome do curso</th>
+            <th scope="col">Professor</th>
+            <th scope="col">descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for curso in cursos %}
+          <tr>
+            <th scope="row">{{ forloop.counter}}</th>
+            <td>{{ curso.nome}}</td>
+            <td>{{ curso.professor.nome}}</td>
+            <td>{{ curso.descricao}}</td>
+            <td><a href="{% url 'editar_curso' curso.id %}">Editar</a></td>
+            <td><a href="{% url 'deletar_curso' curso.id %}">Excluir</a></td>
+          </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4"nenhum curso cadastrado.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    <a href="{% url 'criar_curso' %}">+ Novo Curso</a>
+</body>
+</html>
